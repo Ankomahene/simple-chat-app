@@ -2,53 +2,26 @@ import React from "react";
 import "../styles/MessageCard.css";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
+import { useAppSelector } from "../store/hooks";
 
-const mockMessages = [
-  {
-    id: "123",
-    message: "Hello World",
-    userName: "Cleo",
-    userId: "cleo123",
-  },
-  {
-    id: "456",
-    message: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
-    userName: "Edem",
-    userId: "edem123",
-  },
-  {
-    id: "789",
-    message: "Hello World",
-    userName: "John Doe",
-    userId: "john123",
-  },
-  {
-    id: "987",
-    message: "Lorem ipsum dolor",
-    userName: "Edem",
-    userId: "edem123",
-  },
-];
+export const Messages = ({ userId }) => {
+  const { messages } = useAppSelector((state) => state);
 
-export const Messages = () => {
   return (
     <div className="messages-card">
-      {mockMessages.map((message) => (
-        <Message key={message.id} messageItem={message} />
+      {messages.map((message) => (
+        <Message key={message.id} messageItem={message} userId={userId} />
       ))}
     </div>
   );
 };
 
-const Message = ({ messageItem }) => {
-  const currentUserId = "edem123";
-  const date = new Date();
-
+const Message = ({ messageItem, userId }) => {
   return (
     <>
       <div
         className={`message-box ${
-          messageItem.userId === currentUserId
+          messageItem.userId === userId
             ? "message-box-right"
             : "message-box-left"
         }`}
@@ -63,9 +36,7 @@ const Message = ({ messageItem }) => {
           <div className="username">{messageItem.userName}</div>
           <div className="message">
             <div className="message-text">{messageItem.message}</div>
-            <div className="message-time">
-              {date.getHours()}:{date.getMinutes()}
-            </div>
+            <div className="message-time">{messageItem.time}</div>
           </div>
         </div>
       </div>
