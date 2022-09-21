@@ -6,14 +6,14 @@ const messagesSlice = createSlice({
   name: "messages",
   initialState,
   reducers: {
-    addMessages(state, action) {
+    addMessage(state, action) {
       state.push(action.payload);
     },
-    removeMessages(state, action) {
-      state = state.filter((message) => message.id === action.payload);
+    removeMessage(state, action) {
+      return state.filter((message) => message.id !== action.payload);
     },
   },
 });
 
-export const { addMessages, removeMessages } = messagesSlice.actions;
+export const { addMessage, removeMessage } = messagesSlice.actions;
 export const messagesReducer = messagesSlice.reducer;
