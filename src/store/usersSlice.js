@@ -9,9 +9,6 @@ const usersSlice = createSlice({
     addUser(state, action) {
       state.push(action.payload);
     },
-    removeUser(state, action) {
-      return state.filter((user) => user.id !== action.payload);
-    },
   },
 });
 
