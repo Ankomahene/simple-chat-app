@@ -8,18 +8,14 @@ import {
   CardHeader,
   Card,
 } from "@mui/material";
-import { blue, green, grey } from "@mui/material/colors";
+import { blue, grey } from "@mui/material/colors";
 import PersonIcon from "@mui/icons-material/Person";
 import SendIcon from "@mui/icons-material/Send";
 import { Messages } from "./Messages";
 import { v4 as uid } from "uuid";
 import { useAppDispatch } from "../store/hooks";
 import { addMessage } from "../store/messagesSlice";
-
-const bgGradient = {
-  background: `linear-gradient(to right, ${green[400]}, ${blue[300]})`,
-  color: grey[100],
-};
+import { styles } from "../consts";
 
 export const ChatCard = ({ user }) => {
   const dispatch = useAppDispatch();
@@ -41,7 +37,7 @@ export const ChatCard = ({ user }) => {
   };
 
   return (
-    <Card sx={{ width: "25rem" }}>
+    <Card sx={{ width: "25rem" }} style={styles.cardStyle}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: blue[500] }} aria-label="current-user">
@@ -49,19 +45,18 @@ export const ChatCard = ({ user }) => {
           </Avatar>
         }
         title={user.name}
-        style={bgGradient}
+        style={styles.bgGradient}
       />
-      <CardContent
-        style={{ background: blue[50], height: 400, overflowY: "auto" }}
-      >
+      <CardContent style={styles.cardContentStyle}>
         <Messages userId={user.id} />
       </CardContent>
       <CardActions disableSpacing style={{ background: grey[50] }}>
         <TextField
           hiddenLabel
           id="filled-hidden-label-small"
-          variant="filled"
+          variant="standard"
           size="small"
+          multiline
           sx={{ width: "20rem" }}
           placeholder="Message"
           value={message}
