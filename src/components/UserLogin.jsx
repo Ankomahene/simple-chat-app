@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
   TextField,
   Typography,
@@ -34,13 +33,6 @@ export const UserLogin = ({ handleLogin }) => {
           Join chat
         </Button>
       </CardContent>
-      <CardActions
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-        }}
-      ></CardActions>
     </Card>
   );
 };
