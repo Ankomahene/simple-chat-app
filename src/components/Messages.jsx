@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "../styles/MessageCard.css";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
@@ -6,12 +6,22 @@ import { useAppSelector } from "../store/hooks";
 
 export const Messages = ({ userId }) => {
   const { messages } = useAppSelector((state) => state);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <div className="messages-card">
       {messages.map((message) => (
         <Message key={message.id} messageItem={message} userId={userId} />
       ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 };
